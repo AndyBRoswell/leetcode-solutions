@@ -7,6 +7,9 @@ using namespace std;
 class Solution {
 public:
 	string convert(const string& s, const int rho) {
+		return m1(s, rho);
+	}
+	string m1(const string& s, const int rho) {
 		if (rho == 1) return s;
 		auto get_row = [rho](const int p) {
 			const int Q = p / (rho - 1), R = p % (rho - 1);
