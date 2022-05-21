@@ -1,13 +1,14 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
 public:
 	string convert(const string& s, const int rho) {
-		return m1(s, rho);
+		return m2(s, rho);
 	}
 	string m1(const string& s, const int rho) {
 		if (rho == 1) return s;
@@ -37,6 +38,19 @@ public:
 		string result;
 		for (int i = 0; i < rho; ++i)
 			for (int j = 0; j < chi; ++j) if (a[i][j] != ' ') result += a[i][j];
+		return result;
+	}
+	string m2(const string& s, const int rho) {
+		if (rho == 1) return s;
+		vector<string> a(min(rho, int(s.length()))); // 节省内存：当字符串长度小于指定行数时，矩阵不用那么多行
+		int x = 0, Delta_x = 1;
+		for (char c : s) {
+			a[x] += c; // 节省内存与耗时：将字符串 s 的字符依次放入锯齿形时，列坐标只增不减。根据输出格式的要求，无需保存空格到矩阵里，只需保存不同字符的相对位置即可。
+			if (x == 0 || x == rho - 1) Delta_x = -Delta_x;
+			x += Delta_x;
+		}
+		string result;
+		for (const string& str : a) result += str;
 		return result;
 	}
 };
