@@ -3,8 +3,9 @@
 class Solution {
 public:
     int reverse(int x) {
-        constexpr int t = INT_MAX / 10;
-        const int f = x < 0 ? -1 : 1;
+        constexpr int t = INT_MAX / 10;     // threshold
+        const int f = x < 0 ? -1 : 1;       // factor
+        if (x == -2147483648) { return 0; } // special case
         x = abs(x);
         div_t p{ x, 0 };
         int a = 0;
