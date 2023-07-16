@@ -1,12 +1,14 @@
-#include <string>
 #include <array>
 #include <iostream>
 #include <format>
+
+#include <string>
 
 class Solution {
 public:
     bool isMatch(const std::string& S, const std::string& P) {
         enum class state { single, multi, };
+        enum class special_type { any, };
         state state = state::single;
         size_t i = 0, j = 0;
         char c_rep;
@@ -21,10 +23,10 @@ public:
                     if (S[i] == P[j]) { ++i; ++j; }
                     else { return false; }
                 }
-                if (P[j + 1] == '*') { state = state::multi; }
+                if (j + 1 == P.size() || P[j + 1] == '*') { state = state::multi; }
                 break;
             case state::multi:
-                if (S[i] == c_rep) { ++i; }
+                if (c_rep == '.' || S[i] == c_rep) { ++i; }
                 else { ++j; state = state::single; }
                 break;
             }
