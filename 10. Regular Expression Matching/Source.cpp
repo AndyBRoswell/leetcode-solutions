@@ -1,4 +1,5 @@
 #include <string>
+#include <array>
 
 class Solution {
 public:
@@ -29,3 +30,18 @@ public:
         return j == P.size();
     }
 };
+
+int main() {
+    Solution solution;
+    constexpr std::array<std::array<const char*, 2>, 3> test_cases = {
+        std::array<const char*, 2>{ "aa", "a" },
+        std::array<const char*, 2>{ "aa", "a*" },
+        std::array<const char*, 2>{ "ab", ".*" },
+    };
+    for (const auto& test_case : test_cases) {
+        const auto& S = test_case[0];
+        const auto& P = test_case[1];
+        const auto result = solution.isMatch(S, P);
+        printf("%s, %s: %s\n", S, P, result ? "true" : "false");
+    }
+}
