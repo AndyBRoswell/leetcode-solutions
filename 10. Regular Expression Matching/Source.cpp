@@ -14,24 +14,26 @@ public:
         char c_rep;
         while (i < S.size() && j < P.size()) {
             switch (state) {
-            case state::single:
+            case state::single: {
+                const char next = j + 1 < P.size() ? P[j + 1] : '\0';
                 c_rep = S[i];
                 switch (P[j]) {
-                case '.': ++i; ++j; break;
+                case '.': c_rep = 0; ++i; ++j; break;
                 case '*': return false; // invalid pattern
                 default: // other chars: 'a', 'b', 'c', ...
                     if (S[i] == P[j]) { ++i; ++j; }
                     else { return false; }
                 }
-                if (j + 1 == P.size() || P[j + 1] == '*') { state = state::multi; }
+                if (next == '*') { state = state::multi; }
+            }
                 break;
             case state::multi:
-                if (c_rep == '.' || S[i] == c_rep) { ++i; }
+                if (c_rep == 0 || S[i] == c_rep) { ++i; }
                 else { ++j; state = state::single; }
                 break;
             }
         }
-        return j == P.size();
+        return j == P.size() && state == state::single ? i == S.size() : true;
     }
 };
 
@@ -52,4 +54,6 @@ int main() {
         const auto result = solution.isMatch(S, P);
         std::cout << std::format("{}, {}: {}", S, P, result ? "true" : "false") << std::endl;
     }
+
+    return 0;
 }
