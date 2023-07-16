@@ -20,7 +20,9 @@ public:
         while (i < S.size() && j < P.size()) {
             if (token[j].find('*') != std::string_view::npos) {
                 if (token[j][0] == '.') { // '.*'
-
+                    i = S.size(); // match all
+                    ++j;
+                    break;
                 }
                 else { while (i < S.size() && S[i] == token[j][0]) { ++i; } } // ...
             }
