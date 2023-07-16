@@ -4,11 +4,16 @@
 
 #include <string>
 #include <vector>
+#include <functional>
 
+/// <summary>
+/// Note: When a regular expression includes optional quantifiers or alternation constructs, the evaluation of the input string is no longer linear.
+/// https://learn.microsoft.com/en-us/dotnet/standard/base-types/backtracking-in-regular-expressions
+/// </summary>
 class Solution {
 public:
-    bool isMatch(const std::string& T, const std::string& P) { return has_match_1(T, P); }
-    bool has_match_1(std::string_view T, std::string_view P) {
+    bool isMatch(const std::string& T, const std::string& P) { return has_match_2_bottom_up(T, P); }
+    bool has_match_1(const std::string_view T, const std::string_view P) {
         if (P.empty()) { return T.empty(); }                                    // special case: empty pattern
         const bool first_match = !T.empty() && (T[0] == P[0] || P[0] == '.');   // attempt to match the 1st character
         if (P.size() >= 2 && P[1] == '*') {                         // pattern is with '*'
@@ -20,10 +25,27 @@ public:
                 && has_match_1(T.substr(1), P.substr(1));   // attempt to match the rest
         }
     }
-    bool has_match_2_top_down(std::string_view T, std::string_view P) {
-
+    bool has_match_2_top_down(const std::string_view T, const std::string_view P) {
+        std::vector<std::vector<bool>> m(T.size() + 1, std::vector<bool>(P.size() + 1, false));
+        std::function<bool(size_t, size_t)> D = [&](const size_t i, const size_t j) -> bool {
+            if (m[i][j]) { return m[i][j] == true; }
+            bool ans;
+            if (j == P.size()) { ans = i == T.size(); }
+            else {
+                bool first_match = i < T.size() && (T[i] == P[j] || P[j] == '.');
+                if (j + 1 < P.size() && P[j + 1] == '*') {
+                    ans = D(i, j + 2) || (first_match && D(i + 1, j));
+                }
+                else {
+                    ans = first_match && D(i + 1, j + 1);
+                }
+            }
+            m[i][j] = ans ? true : false;
+            return ans;
+        };
+        return D(0, 0);
     }
-    bool has_match_2_bottom_up(std::string_view T, std::string_view P) {
+    bool has_match_2_bottom_up(const std::string_view T, const std::string_view P) {
 
     }
 };
