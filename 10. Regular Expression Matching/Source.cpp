@@ -8,30 +8,33 @@
 class Solution {
 public:
     bool isMatch(const std::string& S, const std::string& P) {
-        std::vector<std::string_view> token;
+        std::vector<std::string_view> PT;
+        const std::string_view V(P);
         for (size_t i = 0; i < P.size(); ++i) {
             if (i + 1 < P.size() && P[i + 1] == '*') {
-                token.emplace_back(P.substr(i, 2));
+                PT.emplace_back(V.substr(i, 2));
                 ++i;
             }
-            else { token.emplace_back(P.substr(i, 1)); }
+            else { PT.emplace_back(V.substr(i, 1)); }
         }
         size_t i = 0, j = 0;
-        while (i < S.size() && j < P.size()) {
-            if (token[j].find('*') != std::string_view::npos) {
-                if (token[j][0] == '.') { // '.*'
+        while (i < S.size() && j < PT.size()) {
+            if (PT[j].find('*') != std::string_view::npos) {
+                if (PT[j][0] == '.') { // '.*'
                     i = S.size(); // match all
                     ++j;
-                    break;
                 }
-                else { while (i < S.size() && S[i] == token[j][0]) { ++i; } } // ...
+                else { // ...
+                    while (i < S.size() && S[i] == PT[j][0]) { ++i; } // match
+                    ++j;
+                }
             }
             else {
-                if (token[j][0] == '.' || S[i] == token[j][0]) { ++i; } // match
+                if (PT[j][0] == '.' || S[i] == PT[j][0]) { ++i; } // match
                 else { return false; }  // mismatch
             }
         }
-        return S.size() == i && P.size() == j; // complete match is required
+        return S.size() == i && PT.size() == j; // complete match is required
     }
 };
 
