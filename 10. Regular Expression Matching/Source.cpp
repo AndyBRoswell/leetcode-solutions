@@ -1,5 +1,7 @@
 #include <string>
 #include <array>
+#include <iostream>
+#include <format>
 
 class Solution {
 public:
@@ -32,6 +34,10 @@ public:
 };
 
 int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+
     Solution solution;
     constexpr std::array<std::array<const char*, 2>, 3> test_cases = {
         std::array<const char*, 2>{ "aa", "a" },
@@ -42,6 +48,6 @@ int main() {
         const auto& S = test_case[0];
         const auto& P = test_case[1];
         const auto result = solution.isMatch(S, P);
-        printf("%s, %s: %s\n", S, P, result ? "true" : "false");
+        std::cout << std::format("{}, {}: {}", S, P, result ? "true" : "false") << std::endl;
     }
 }
