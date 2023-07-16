@@ -10,10 +10,11 @@ public:
         while (i < S.size() && j < P.size()) {
             switch (state) {
             case state::single:
+                c_rep = S[i];
                 switch (P[j]) {
-                case '.': c_rep = S[i]; ++i; ++j; break;
+                case '.': ++i; ++j; break;
                 default:
-                    if (S[i] == P[j]) { c_rep = S[i]; ++i; ++j; }
+                    if (S[i] == P[j]) { ++i; ++j; }
                     else { return false; }
                 }
                 if (P[j + 1] == '*') { state = state::multi; }
