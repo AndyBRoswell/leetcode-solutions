@@ -30,7 +30,7 @@ public:
                 }
             }
             else {
-                if (PT[j][0] == '.' || S[i] == PT[j][0]) { ++i; } // match
+                if (PT[j][0] == '.' || S[i] == PT[j][0]) { ++i; ++j; } // match
                 else { return false; }  // mismatch
             }
         }
@@ -44,10 +44,11 @@ int main() {
     std::cout.tie(nullptr);
 
     Solution solution;
-    constexpr std::array<std::array<const char*, 2>, 3> test_cases = {
+    constexpr std::array<std::array<const char*, 2>, 4> test_cases = {
         std::array<const char*, 2>{ "aa", "a" },
         std::array<const char*, 2>{ "aa", "a*" },
         std::array<const char*, 2>{ "ab", ".*" },
+        std::array<const char*, 2>{ "aab", "c*a*b" },
     };
     for (const auto& test_case : test_cases) {
         const auto& S = test_case[0];
