@@ -13,15 +13,19 @@ public:
                 c_rep = S[i];
                 switch (P[j]) {
                 case '.': ++i; ++j; break;
-                default:
+                case '*': return false; // invalid pattern
+                default: // other chars: 'a', 'b', 'c', ...
                     if (S[i] == P[j]) { ++i; ++j; }
                     else { return false; }
                 }
                 if (P[j + 1] == '*') { state = state::multi; }
                 break;
             case state::multi:
+                if (S[i] == c_rep) { ++i; }
+                else { ++j; state = state::single; }
                 break;
             }
         }
+        return j == P.size();
     }
 };
