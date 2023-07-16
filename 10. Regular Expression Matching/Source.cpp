@@ -3,37 +3,33 @@
 #include <format>
 
 #include <string>
+#include <vector>
 
 class Solution {
 public:
     bool isMatch(const std::string& S, const std::string& P) {
-        enum class state { single, multi, };
-        enum class special_type { any, };
-        state state = state::single;
-        size_t i = 0, j = 0;
-        char c_rep;
-        while (i < S.size() && j < P.size()) {
-            switch (state) {
-            case state::single: {
-                const char next = j + 1 < P.size() ? P[j + 1] : '\0';
-                c_rep = S[i];
-                switch (P[j]) {
-                case '.': c_rep = 0; ++i; ++j; break;
-                case '*': return false; // invalid pattern
-                default: // other chars: 'a', 'b', 'c', ...
-                    if (S[i] == P[j]) { ++i; ++j; }
-                    else { return false; }
-                }
-                if (next == '*') { state = state::multi; }
+        std::vector<std::string_view> token;
+        for (size_t i = 0; i < P.size(); ++i) {
+            if (i + 1 < P.size() && P[i + 1] == '*') {
+                token.emplace_back(P.substr(i, 2));
+                ++i;
             }
-                break;
-            case state::multi:
-                if (c_rep == 0 || S[i] == c_rep) { ++i; }
-                else { ++j; state = state::single; }
-                break;
+            else { token.emplace_back(P.substr(i, 1)); }
+        }
+        size_t i = 0, j = 0;
+        while (i < S.size() && j < P.size()) {
+            if (token[j].find('*') != std::string_view::npos) {
+                if (token[j][0] == '.') { // '.*'
+
+                }
+                else { while (i < S.size() && S[i] == token[j][0]) { ++i; } } // ...
+            }
+            else {
+                if (token[j][0] == '.' || S[i] == token[j][0]) { ++i; } // match
+                else { return false; }  // mismatch
             }
         }
-        return j == P.size() && state == state::single ? i == S.size() : true;
+        return S.size() == i && P.size() == j; // complete match is required
     }
 };
 
