@@ -7,23 +7,23 @@
 
 class Solution {
 public:
-    bool isMatch(const std::string& S, const std::string& P) { return has_match_1(S, P); }
-    bool has_match_1(std::string_view S, std::string_view P) {
-        if (P.empty()) { return S.empty(); } // special case: empty pattern
-        const bool first_match = !S.empty() && (S[0] == P[0] || P[0] == '.'); // attempt to match the 1st character
-        if (P.size() >= 2 && P[1] == '*') { // pattern is with '*'
-            return has_match_1(S, P.substr(2)) // 0 repetition
-                || (first_match && has_match_1(S.substr(1), P)); // 1 or more repetitions
+    bool isMatch(const std::string& T, const std::string& P) { return has_match_1(T, P); }
+    bool has_match_1(std::string_view T, std::string_view P) {
+        if (P.empty()) { return T.empty(); }                                    // special case: empty pattern
+        const bool first_match = !T.empty() && (T[0] == P[0] || P[0] == '.');   // attempt to match the 1st character
+        if (P.size() >= 2 && P[1] == '*') {                         // pattern is with '*'
+            return has_match_1(T, P.substr(2))                      // 0 repetition
+                || (first_match && has_match_1(T.substr(1), P));    // 1 or more repetitions
         }
-        else { // pattern is without '*'
+        else {                                              // pattern is without '*'
             return first_match
-                && has_match_1(S.substr(1), P.substr(1)); // attempt to match the rest
+                && has_match_1(T.substr(1), P.substr(1));   // attempt to match the rest
         }
     }
-    bool has_match_2_top_down(std::string_view S, std::string_view P) {
+    bool has_match_2_top_down(std::string_view T, std::string_view P) {
 
     }
-    bool has_match_2_bottom_up(std::string_view S, std::string_view P) {
+    bool has_match_2_bottom_up(std::string_view T, std::string_view P) {
 
     }
 };
