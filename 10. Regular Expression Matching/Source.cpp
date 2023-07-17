@@ -35,11 +35,12 @@ public:
             else {
                 bool first_match = i < T.size() && (T[i] == P[j] || P[j] == '.'); // attempt to match the 1st character
                 if (j + 1 < P.size() && P[j + 1] == '*') {  // pattern is with '*'
-                    ans = D(i, j + 2)                       // 0 repetition 
+                    ans = D(i, j + 2)                       // 0 repetition
                         || (first_match && D(i + 1, j));    // 1 or more repetitions
                 }
                 else {                                      // pattern is without '*'
-                    ans = first_match && D(i + 1, j + 1);   // attempt to match the rest
+                    ans = first_match
+                        && D(i + 1, j + 1);   // attempt to match the rest
                 }
             }
             m[i][j] = ans ? true : false;
@@ -48,7 +49,22 @@ public:
         return D(0, 0);
     }
     bool has_match_2_bottom_up(const std::string_view T, const std::string_view P) {
-
+        std::vector<std::vector<bool>> m(T.size() + 1, std::vector<bool>(P.size() + 1, false));
+        m[T.size()][P.size()] = true;   // empty pattern <-> empty text
+        for (size_t i = T.size(); i != -1; --i) {
+            for (size_t j = P.size() - 1; j != -1; --j) {
+                bool first_match = i < T.size() && (T[i] == P[j] || P[j] == '.'); // attempt to match the 1st character
+                if (j + 1 < P.size() && P[j + 1] == '*') {  // pattern is with '*'
+                    m[i][j] = m[i][j + 2]                   // 0 repetition
+                        || (first_match && m[i + 1][j]);    // 1 or more repetitions
+                }
+                else {                      // pattern is without '*'
+                    m[i][j] = first_match
+                        && m[i + 1][j + 1]; // attempt to match the rest
+                }
+            }
+        }
+        return m[0][0];
     }
 };
 
