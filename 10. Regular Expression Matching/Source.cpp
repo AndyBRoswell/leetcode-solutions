@@ -26,20 +26,20 @@ public:
         }
     }
     bool has_match_2_top_down(const std::string_view T, const std::string_view P) {
-        // m[i][j] = true if T[i:] matches P[j:]
-        // If m[i, j] 
+        // T[i:] matches P[j:] => m[i][j] = true
+        // ∀m[i′][j′] = true s.t. i′ > i and j′ > j <=> m[i][j] = true
         std::vector<std::vector<bool>> m(T.size() + 1, std::vector<bool>(P.size() + 1, false));
         std::function<bool(size_t, size_t)> D = [&](const size_t i, const size_t j) -> bool {
-            if (m[i][j]) { return m[i][j] == true; }
             bool ans;
-            if (j == P.size()) { ans = i == T.size(); }
+            if (j == P.size()) { ans = i == T.size(); } // special case: empty pattern <-> empty text
             else {
-                bool first_match = i < T.size() && (T[i] == P[j] || P[j] == '.');
-                if (j + 1 < P.size() && P[j + 1] == '*') {
-                    ans = D(i, j + 2) || (first_match && D(i + 1, j));
+                bool first_match = i < T.size() && (T[i] == P[j] || P[j] == '.'); // attempt to match the 1st character
+                if (j + 1 < P.size() && P[j + 1] == '*') {  // pattern is with '*'
+                    ans = D(i, j + 2)                       // 0 repetition 
+                        || (first_match && D(i + 1, j));    // 1 or more repetitions
                 }
-                else {
-                    ans = first_match && D(i + 1, j + 1);
+                else {                                      // pattern is without '*'
+                    ans = first_match && D(i + 1, j + 1);   // attempt to match the rest
                 }
             }
             m[i][j] = ans ? true : false;
