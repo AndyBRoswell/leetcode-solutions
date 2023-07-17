@@ -26,6 +26,8 @@ public:
         }
     }
     bool has_match_2_top_down(const std::string_view T, const std::string_view P) {
+        // m[i][j] = true if T[i:] matches P[j:]
+        // If m[i, j] 
         std::vector<std::vector<bool>> m(T.size() + 1, std::vector<bool>(P.size() + 1, false));
         std::function<bool(size_t, size_t)> D = [&](const size_t i, const size_t j) -> bool {
             if (m[i][j]) { return m[i][j] == true; }
