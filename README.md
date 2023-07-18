@@ -2,4 +2,5 @@
  
 LeetCode solution written in modern C++ features (since C++11).
 
-Some proofs are included.
+Some proofs are included: 
+- 11
