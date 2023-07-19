@@ -6,7 +6,7 @@ public:
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
         std::vector<std::vector<int>> result;
         std::sort(nums.begin(), nums.end()); // so that we can immediately eliminate some impossible cases (the smallest one of the 3-tuple is positive)
-        for (auto i = nums.cbegin(); i != nums.cend() && *i <= 0; ++i) {
+        for (auto i = nums.cbegin(); i != nums.cend() - 2 && *i <= 0; ++i) {
             if (i != nums.cbegin() && *i == *(i - 1)) { continue; } // eliminate duplicates
             auto L = i + 1, R = nums.cend() - 1;
             while (L < R) {
