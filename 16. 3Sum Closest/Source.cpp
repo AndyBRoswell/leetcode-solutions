@@ -16,8 +16,6 @@ public:
                 if (abs(sum - target) < abs(ans - target)) {
                     ans = sum;
                     if (ans == target) { return ans; } // early return
-                    while (L < R && L + 1 < nums.cend() && *L == *(L + 1)) { ++L; }     // eliminate duplicates
-                    while (L < R && R - 1 > nums.cbegin() && *R == *(R - 1)) { --R; }   // eliminate duplicates
                 }
                 if (sum < target) { ++L; }
                 else { --R; }
@@ -31,8 +29,8 @@ int main() {
     Solution s;
     struct input { std::vector<int> nums; int target; };
     std::array<struct input, 2> inputs{{
-        { {4, 0, 5, -5, 3, 3, 0, -4, -5}, -2 },
-        { {-1000,-5,-5,-5,-5,-5,-5,-1,-1,-1}, -15 }
+        { { 4, 0, 5, -5, 3, 3, 0, -4, -5 }, -2 },
+        { { -1000, -5, -5, -5, -5, -5, -5, -1, -1, -1 }, -15 }
         }};
     for (auto& input : inputs) {
         std::cout << s.threeSumClosest(input.nums, input.target) << std::endl;
