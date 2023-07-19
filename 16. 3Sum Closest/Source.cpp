@@ -19,7 +19,7 @@ public:
                     while (L < R && L + 1 < nums.cend() && *L == *(L + 1)) { ++L; }     // eliminate duplicates
                     while (L < R && R - 1 > nums.cbegin() && *R == *(R - 1)) { --R; }   // eliminate duplicates
                 }
-                if (ans < target) { ++L; }
+                if (sum < target) { ++L; }
                 else { --R; }
             }
         }
@@ -30,8 +30,9 @@ public:
 int main() {
     Solution s;
     struct input { std::vector<int> nums; int target; };
-    std::array<struct input, 1> inputs{ {
-        { {4, 0, 5, -5, 3, 3, 0, -4, -5}, -2 }
+    std::array<struct input, 2> inputs{{
+        { {4, 0, 5, -5, 3, 3, 0, -4, -5}, -2 },
+        { {-1000,-5,-5,-5,-5,-5,-5,-1,-1,-1}, -15 }
         }};
     for (auto& input : inputs) {
         std::cout << s.threeSumClosest(input.nums, input.target) << std::endl;
