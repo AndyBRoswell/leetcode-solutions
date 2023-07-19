@@ -15,7 +15,7 @@ public:
                     result.push_back({ *i, *L, *R });
                     while (L < R && L + 1 < nums.cend() && *L == *(L + 1)) { ++L; }     // eliminate duplicates
                     while (L < R && R - 1 > nums.cbegin() && *R == *(R - 1)) { --R; }   // eliminate duplicates
-                    ++L; --R;                                                           // only move one of the pointers is not enough after eliminating duplicates
+                    ++L; --R;                                                           // only moving 1 of the pointers causes sum != 0 thus we also move the other one to eliminate unnecessary comparisons
                 }
                 else if (sum < 0) { ++L; }
                 else { --R; }
