@@ -14,11 +14,10 @@ public:
         const std::vector<size_t> v0(d.size(), 0);
         std::vector<size_t> v = v0;
         do {
-            std::string str;
-            for (size_t i = 0; i < d.size(); ++i) { str += L[d[i]][v[i]]; }
-            ans.push_back(str);
             for (size_t i = 0; i < L[*d.crbegin()].size(); ++i) {
-
+                std::string str;
+                for (size_t i = 0; i < d.size(); ++i) { str += L[d[i]][v[i]]; }
+                ans.push_back(str);
             }
         } while (v != v0);
         return ans;
