@@ -13,7 +13,7 @@ public:
         std::vector<std::string> ans;
         const std::vector<size_t> v0(d.size(), 0);
         std::vector<size_t> v = v0;
-        do {
+        while (true) {
             for (size_t i = 0; i < L[*d.crbegin()].size(); ++i, ++ * v.rbegin()) {
                 std::string str;
                 for (size_t i = 0; i < d.size(); ++i) { str += L[d[i]][v[i]]; }
@@ -29,14 +29,14 @@ public:
                 }
                 if (*v.cbegin() == L[d[0]].size()) { *v.begin() = 0; break; } // overflow (all combinations are generated)
             }
-        } while (v != v0);
+        }
         return ans;
     }
 };
 
 int main() {
     Solution s;
-    constexpr const char* inputs[] = { "23", };
+    constexpr const char* inputs[] = { "23", "5678", };
     for (const auto& input : inputs) {
         std::string digits(input);
         const auto ans = s.letterCombinations(digits);
