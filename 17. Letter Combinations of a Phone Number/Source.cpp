@@ -11,7 +11,7 @@ public:
         for (auto& digit : digits) { digit = digit - '0'; }         // just for convenience of subsequent processing
         const std::vector<int> d(digits.cbegin(), digits.cend());   // d: digit
         std::vector<std::string> ans;
-        std::vector<size_t> v(d.size(), 0);
+        std::vector<size_t> v(d.size(), 0);                         // v: index of letter associated with the digits
         while (true) {
             for (size_t i = 0; i < L[*d.crbegin()].size(); ++i, ++ * v.rbegin()) { // LSB
                 std::string str;
