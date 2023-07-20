@@ -22,10 +22,13 @@ public:
             }
             *v.rbegin() = 0;
             if (d.size() > 1) { // carry
-                for (auto i = v.rbegin() + 1; i != v.rend(); ++i) {
+                ++*(v.rbegin() + 1);
+                for (auto i = v.rbegin() + 1; i != v.rend() - 1; ++i) {
                     if (*i < L[d[i - v.rbegin()]].size()) { break; }
                     *i = 0;
+                    ++*(i + 1);
                 }
+                if (*v.cbegin() == L[d[0]].size()) { *v.begin() = 0; break; } // overflow (all combinations are generated)
             }
         } while (v != v0);
         return ans;
