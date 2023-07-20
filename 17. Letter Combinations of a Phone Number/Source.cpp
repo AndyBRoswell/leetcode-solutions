@@ -11,19 +11,17 @@ public:
         const std::set<int> s(digits.cbegin(), digits.cend());
         const std::vector<int> d(s.cbegin(), s.cend());
         std::vector<std::string> ans;
-        const std::vector<size_t> initial_value(d.size(), 0);
-        std::vector<size_t> current_value = initial_value;
+        const std::vector<size_t> v0(d.size(), 0);
+        std::vector<size_t> v = v0;
         do {
             std::string str;
-            for (size_t i = 0; i < d.size(); ++i) { str += L[d[i]][current_value[i]]; }
+            for (size_t i = 0; i < d.size(); ++i) { str += L[d[i]][v[i]]; }
             ans.push_back(str);
-            for (size_t i = 0; i < d.size(); ++i) {
-                if (current_value[i] < L[d[i]].size() - 1) { ++current_value[i]; break; }
-                else {
-                    current_value[i] = 0;
-                }
+            for (size_t i = 0; i < L[*d.crbegin()].size(); ++i) {
+
             }
-        } while (current_value != initial_value);
+        } while (v != v0);
+        return ans;
     }
 };
 
