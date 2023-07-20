@@ -13,8 +13,8 @@ public:
                 const int sum = *i + *L + *R;
                 if (sum == 0) {
                     result.push_back({ *i, *L, *R });
-                    while (L < R && L + 1 < nums.cend() && *L == *(L + 1)) { ++L; }     // eliminate duplicate 3-tuples as well as 3-tuples with duplicate elements
-                    while (L < R && R - 1 > nums.cbegin() && *R == *(R - 1)) { --R; }   // eliminate duplicate 3-tuples as well as 3-tuples with duplicate elements
+                    while (L < R && L + 1 < nums.cend() && *L == *(L + 1)) { ++L; }     // eliminate the remaining duplicate 3-tuples as well as 3-tuples with duplicate elements
+                    while (L < R && R - 1 > nums.cbegin() && *R == *(R - 1)) { --R; }   // eliminate the remaining duplicate 3-tuples as well as 3-tuples with duplicate elements
                     ++L; --R;                                                           // only moving 1 of the pointers causes sum != 0 thus we also move the other one to eliminate unnecessary comparisons
                 }
                 else if (sum < 0) { ++L; }
