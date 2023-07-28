@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "19. Remove Nth Node From En
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20. Valid Parentheses", "20. Valid Parentheses\20. Valid Parentheses.vcxproj", "{F3137D36-B0E4-4D43-A8BB-AF74F23B037E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "21. Merge Two Sorted Lists", "21. Merge Two Sorted Lists\21. Merge Two Sorted Lists.vcxproj", "{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -211,6 +213,14 @@ Global
 		{F3137D36-B0E4-4D43-A8BB-AF74F23B037E}.Release|x64.Build.0 = Release|x64
 		{F3137D36-B0E4-4D43-A8BB-AF74F23B037E}.Release|x86.ActiveCfg = Release|Win32
 		{F3137D36-B0E4-4D43-A8BB-AF74F23B037E}.Release|x86.Build.0 = Release|Win32
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Debug|x64.ActiveCfg = Debug|x64
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Debug|x64.Build.0 = Debug|x64
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Debug|x86.ActiveCfg = Debug|Win32
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Debug|x86.Build.0 = Debug|Win32
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Release|x64.ActiveCfg = Release|x64
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Release|x64.Build.0 = Release|x64
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Release|x86.ActiveCfg = Release|Win32
+		{AFBB5A9C-94DF-4AB8-B11C-A7DA68144B16}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
