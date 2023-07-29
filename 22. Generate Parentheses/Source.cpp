@@ -3,13 +3,13 @@
 
 class Solution {
 public:
-    void DFS(int n, int left, int right, std::vector<std::string>& ans, const std::string& str) {
-        if (str.size() == 2 * n) {
-            ans.emplace_back(str);
+    void DFS(int n, int nL, int nR, std::vector<std::string>& S, const std::string& s) {
+        if (s.size() == 2 * n) {
+            S.emplace_back(s);
             return;
         }
-        if (left < n) { DFS(n, left + 1, right, ans, str + '('); }
-        if (right < left) { DFS(n, left, right + 1, ans, str + ')'); }
+        if (nL < n) { DFS(n, nL + 1, nR, S, s + '('); }
+        if (nR < nL) { DFS(n, nL, nR + 1, S, s + ')'); }
     }
     std::vector<std::string> generateParenthesis(int n) {
         std::vector<std::string> ans;
