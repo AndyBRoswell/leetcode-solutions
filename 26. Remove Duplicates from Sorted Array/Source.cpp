@@ -6,19 +6,16 @@ class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
         // the problem assumes nums.size() >= 1
-        size_t _UFirst = 0, _UFirstb;
-        const size_t _ULast = nums.size();
-        for (_UFirstb = _UFirst; ++_UFirst < _ULast; _UFirstb = _UFirst) {
-            if (nums[_UFirstb] == nums[_UFirst]) {
-                while (++_UFirst != _ULast) {
-                    if (nums[_UFirstb] != nums[_UFirst]) {
-                        nums[++_UFirstb] = nums[_UFirst];
-                    }
+        size_t i = 0;
+        for (size_t j = i; ++i < nums.size(); j = i) {
+            if (nums[j] == nums[i]) {
+                while (++i != nums.size()) {
+                    if (nums[j] != nums[i]) { nums[++j] = nums[i]; }
                 }
-                return ++_UFirstb;
+                return ++j;
             }
         }
-        return _ULast;
+        return nums.size();
     }
 };
 
