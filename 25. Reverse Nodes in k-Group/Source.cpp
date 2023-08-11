@@ -23,7 +23,7 @@ public:
             p[k + 1] = p[k]->next;
             return true;
             };
-        for (p[0] = dummy; p[0] != nullptr; p[0] = p[k - 1]->next) {
+        for (p[0] = dummy; p[0] != nullptr; p[0] = p[1]) {
             if (try_next_nodes() == false) { break; }
             p[0]->next = p[k];
             for (int i = k; i > 1; --i) { p[i]->next = p[i - 1]; }
