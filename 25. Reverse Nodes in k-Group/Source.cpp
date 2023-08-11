@@ -14,7 +14,7 @@ public:
     ListNode* reverseKGroup(ListNode* head, const int k) {
         if (head == nullptr) { return head; }
         ListNode* const dummy = new ListNode(0, head);
-        std::vector<ListNode*> p(k + 2);
+        std::vector<ListNode*> p(k + 2); // only p[1..n] participate in the reversal
         auto try_next_nodes = [&]() {
             for (int i = 0; i < k; ++i) {
                 if (p[i]->next != nullptr) { p[i + 1] = p[i]->next; }
