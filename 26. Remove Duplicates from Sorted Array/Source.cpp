@@ -10,15 +10,14 @@ public:
         // the problem assumes nums.size() >= 1
         // i: Current element
         // j: Last element of the unique elements. We always put next unique element at index j + 1
-        for (size_t i = 0, j = 0; ++i != nums.size(); ++j) {
-            if (nums[j] == nums[i]) { // Note: when the 1st time this branch is reached, i = 1 but j = 0
-                while (++i != nums.size()) { // skip all the duplicates
-                    if (nums[j] != nums[i]) { // found the next unique element
-                        nums[++j] = nums[i]; // Note: nums[0] is always unique, so we can safely increment j
-                    }
+        for (size_t i = 0, j = 0; i != nums.size(); ++j) {
+            while (++i != nums.size()) { // skip all the duplicates
+                // Note: when the 1st time this branch is reached, i = 1 but j = 0
+                if (nums[j] != nums[i]) {
+                    nums[++j] = nums[i]; // Note: nums[0] is always unique, so we can safely increment j
                 }
-                return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
             }
+            return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
         }
         return nums.size(); // all the elements are unique
     }
@@ -33,7 +32,7 @@ int main() {
         { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 },
     };
     Solution s;
-    for (auto& test_case: test_cases) {
+    for (auto& test_case : test_cases) {
         const auto ret = s.removeDuplicates(test_case);
         std::cout << ret << ", ";
         //std::unique(test_case.begin(),test_case.end());
