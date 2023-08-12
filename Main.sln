@@ -55,6 +55,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "25. Reverse Nodes in k-Grou
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "26. Remove Duplicates from Sorted Array", "26. Remove Duplicates from Sorted Array\26. Remove Duplicates from Sorted Array.vcxproj", "{1E9B0850-3E1D-4173-B68B-B0EA4F384F88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "27. Remove Element", "27. Remove Element\27. Remove Element.vcxproj", "{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -271,6 +273,14 @@ Global
 		{1E9B0850-3E1D-4173-B68B-B0EA4F384F88}.Release|x64.Build.0 = Release|x64
 		{1E9B0850-3E1D-4173-B68B-B0EA4F384F88}.Release|x86.ActiveCfg = Release|Win32
 		{1E9B0850-3E1D-4173-B68B-B0EA4F384F88}.Release|x86.Build.0 = Release|Win32
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Debug|x64.ActiveCfg = Debug|x64
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Debug|x64.Build.0 = Debug|x64
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Debug|x86.Build.0 = Debug|Win32
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Release|x64.ActiveCfg = Release|x64
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Release|x64.Build.0 = Release|x64
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Release|x86.ActiveCfg = Release|Win32
+		{F20137F3-6DE3-4B60-BAFC-EB3D67ABD93F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
