@@ -10,16 +10,14 @@ public:
         // the problem assumes nums.size() >= 1
         // i: Current element
         // j: Last element of the unique elements. We always put next unique element at index j + 1
-        for (size_t i = 0, j = 0; i != nums.size(); ++j) {
-            while (++i != nums.size()) { // skip all the duplicates
-                // Note: when the 1st time this branch is reached, i = 1 but j = 0
-                if (nums[j] != nums[i]) {
-                    nums[++j] = nums[i]; // Note: nums[0] is always unique, so we can safely increment j
-                }
+        size_t i = 0, j = 0;
+        while (++i != nums.size()) { // skip all the duplicates
+            // Note: when the 1st time this branch is reached, i = 1 but j = 0
+            if (nums[j] != nums[i]) {
+                nums[++j] = nums[i]; // Note: nums[0] is always unique, so we can safely increment j
             }
-            return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
         }
-        return nums.size(); // all the elements are unique
+        return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
     }
 };
 
