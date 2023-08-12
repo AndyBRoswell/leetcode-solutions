@@ -4,6 +4,8 @@
 
 class Solution {
 public:
+    // https://leetcode.com/problems/remove-duplicates-from-sorted-array/solutions/3676877/best-method-100-c-java-python-beginner-friendly/
+    // See MSVC implementation of std::unique
     int removeDuplicates(std::vector<int>& nums) {
         // the problem assumes nums.size() >= 1
         // i: current element
