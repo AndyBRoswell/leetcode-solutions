@@ -8,13 +8,13 @@ public:
     // See MSVC implementation of std::unique
     int removeDuplicates(std::vector<int>& nums) {
         // the problem assumes nums.size() >= 1
-        // i: Current element
+        // i: Current index
         // j: Last element of the unique elements. We always put next unique element at index j + 1
         size_t i = 0, j = 0;
         while (++i != nums.size()) { // skip all the duplicates
             // Note: when the 1st time this branch is reached, i = 1 but j = 0
-            if (nums[j] != nums[i]) {
-                nums[++j] = nums[i]; // Note: nums[0] is always unique, so we can safely increment j
+            if (nums[j] != nums[i]) {   // if the current element nums[i] is different from the last unique element nums[j]
+                nums[++j] = nums[i];    // Note: nums[0] is always unique, so we can safely increment j
             }
         }
         return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
