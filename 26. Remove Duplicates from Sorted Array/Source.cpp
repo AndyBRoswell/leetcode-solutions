@@ -6,12 +6,14 @@ class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
         // the problem assumes nums.size() >= 1
-        for (size_t i = 0, j = 0; ++i < nums.size(); j = i) {
-            if (nums[j] == nums[i]) {
-                while (++i != nums.size()) {
-                    if (nums[j] != nums[i]) { nums[++j] = nums[i]; }
+        // i: current element
+        // j: last element of the unique elements
+        for (size_t i = 0, j = 0; ++i < nums.size(); j = i) { // j = i: skip all the duplicates
+            if (nums[j] == nums[i]) { // found a duplicate
+                while (++i != nums.size()) { // skip all the duplicates
+                    if (nums[j] != nums[i]) { nums[++j] = nums[i]; } // found the next unique element
                 }
-                return ++j;
+                return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
             }
         }
         return nums.size();
