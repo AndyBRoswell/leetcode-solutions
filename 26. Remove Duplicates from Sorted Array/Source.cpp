@@ -6,7 +6,7 @@ class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
         // the problem assumes nums.size() >= 1
-        for (size_t i = 0, j = i; ++i < nums.size(); j = i) {
+        for (size_t i = 0, j = 0; ++i < nums.size(); j = i) {
             if (nums[j] == nums[i]) {
                 while (++i != nums.size()) {
                     if (nums[j] != nums[i]) { nums[++j] = nums[i]; }
