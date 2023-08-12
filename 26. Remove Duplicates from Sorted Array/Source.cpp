@@ -10,7 +10,8 @@ public:
         // the problem assumes nums.size() >= 1
         // i: current element
         // j: last element of the unique elements
-        for (size_t i = 0, j = 0; ++i < nums.size(); j = i) { // j = i: skip all the duplicates
+        for (size_t i = 0, j = 0; ++i < nums.size(); ++j) {
+            // Note: when the 1st time this branch is reached, i = 1 but j = 0
             if (nums[j] == nums[i]) { // found a duplicate
                 while (++i != nums.size()) { // skip all the duplicates
                     if (nums[j] != nums[i]) { nums[++j] = nums[i]; } // found the next unique element
@@ -18,7 +19,7 @@ public:
                 return ++j; // return the size of the unique elements, corresponding to the last index (end() iterator)
             }
         }
-        return nums.size();
+        return nums.size(); // all the elements are unique
     }
 };
 
