@@ -3,7 +3,11 @@
 #include <iostream>
 
 // https://leetcode.com/problems/divide-two-integers/solutions/13407/c-bit-manipulations/
-// The solution above uses long for D and d but this causes infinite loop on my platform.
+// <Weird Situation>
+// The solution above uses long for D and d and uses labs(long) instead of abs(int).
+// It passed all the tests on LeetCode but causes infinite loop on my platform (Windows 11 Pro 22H2 (22621.2134), Visual Studio 17.7.3 with MSVC 19.37.32822).
+// However, if I substitute long with int, then the result is TLE on LeetCode when dividend == 2^31 - 1.
+// On x86 platforms, int and long are both 32-bit signed integer type, so this should not matter.
 class Solution {
 public:
     int divide(int dividend, int divisor) {
