@@ -59,6 +59,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "27. Remove Element", "27. R
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "28. Find the Index of the First Occurrence in a String", "28. Find the Index of the First Occurrence in a String\28. Find the Index of the First Occurrence in a String.vcxproj", "{F54011D0-A9E3-4E3F-B43D-B80138C47BC9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "29. Divide Two Integers", "29. Divide Two Integers\29. Divide Two Integers.vcxproj", "{7F6B24AD-0833-43E0-961F-41AA8EF7074E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -291,6 +293,14 @@ Global
 		{F54011D0-A9E3-4E3F-B43D-B80138C47BC9}.Release|x64.Build.0 = Release|x64
 		{F54011D0-A9E3-4E3F-B43D-B80138C47BC9}.Release|x86.ActiveCfg = Release|Win32
 		{F54011D0-A9E3-4E3F-B43D-B80138C47BC9}.Release|x86.Build.0 = Release|Win32
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Debug|x64.ActiveCfg = Debug|x64
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Debug|x64.Build.0 = Debug|x64
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Debug|x86.ActiveCfg = Debug|Win32
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Debug|x86.Build.0 = Debug|Win32
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Release|x64.ActiveCfg = Release|x64
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Release|x64.Build.0 = Release|x64
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Release|x86.ActiveCfg = Release|Win32
+		{7F6B24AD-0833-43E0-961F-41AA8EF7074E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
