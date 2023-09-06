@@ -17,6 +17,7 @@ public:
             default: return 0;
             }
         }
+        // For cases where dividend == -2^31 or 2^31 - 1 and divisor is power of 2, we deal with them specially to avoid infinite loop.
         if (dividend == INT_MIN) { // special case: dividend == -2^31
             switch (divisor) {
             case 1: return INT_MIN;
@@ -43,8 +44,8 @@ public:
             }
         }
         const int s = dividend > 0 ^ divisor > 0 ? -1 : 1;  // sign
-        unsigned D = labs(dividend);                        // dividend (Note: if D is int, then D = INT_MAX will overflow and result in infinite loop)
-        const unsigned d = labs(divisor);                   // divisor
+        unsigned D = abs(dividend);                         // dividend (Note: if D is int, then D = INT_MAX will overflow and result in infinite loop)
+        const unsigned d = abs(divisor);                    // divisor
         if (D < d) { return 0; }                            // just in order to bypass the overflow sanitizer on LeetCode
         int q = 0;                                          // quotient
         while (D >= d) {
