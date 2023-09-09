@@ -49,7 +49,7 @@ public:
         std::unordered_map<std::string, int> wordDict;
         std::unordered_map<std::string, int> usedWords;
         const int word_len = words[0].length(), total_words = words.size();
-        int left = 0, right = 0;
+        int left = 0, right = 0; // current window
         const int n = s.length();
         int words_used = 0;
         std::vector<int> ans;
@@ -77,9 +77,9 @@ public:
                 // If the freq gets higher, then we start removing words from the beginning of window, until the window becomes valid again
                 else {
                     while (left < right) {
-                        auto to_remove = s.substr(left, word_len);
-                        usedWords[to_remove]--;
-                        if (usedWords[to_remove] == 0) { usedWords.erase(to_remove); }
+                        auto word_to_remove = s.substr(left, word_len);
+                        usedWords[word_to_remove]--;
+                        if (usedWords[word_to_remove] == 0) { usedWords.erase(word_to_remove); }
                         words_used--;
                         left += word_len;
                         if (usedWords[curr] < wordDict[curr]) { break; }
@@ -90,11 +90,11 @@ public:
                 right += word_len;
                 // if the words of our current window get equal to the total words required, then we can add the index of the starting of the window (left pointer) to our answer array, and move the left pointer 1 step forward.
                 // We can't set the left pointer to point to right because we might have an answer starting from left + word_len. So we only increment it 1 step forward.
-                if (words_used == total_words) {
+                if (words_used == total_words) { // Note: Here len[left, right) == total_words * word_len
                     ans.push_back(left);
-                    auto to_remove = s.substr(left, word_len);
-                    usedWords[to_remove]--;
-                    if (usedWords[to_remove] == 0) { usedWords.erase(to_remove); }
+                    auto word_to_remove = s.substr(left, word_len);
+                    usedWords[word_to_remove]--;
+                    if (usedWords[word_to_remove] == 0) { usedWords.erase(word_to_remove); }
                     words_used--;
                     left += word_len;
                 }
