@@ -53,8 +53,9 @@ public:
     std::vector<int> find_substring_2(const std::string& s, const std::vector<std::string>& words) {
         std::unordered_map<std::string, int> wordDict;
         std::unordered_map<std::string, int> usedWords;
-        int word_len = words[0].length(), total_words = words.size();
-        int left = 0, right = 0, n = s.length();
+        const int word_len = words[0].length(), total_words = words.size();
+        int left = 0, right = 0;
+        const int n = s.length();
         int words_used = 0;
         std::vector<int> ans;
         // wordDict contains all words with their frequencies
