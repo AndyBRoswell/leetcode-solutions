@@ -50,25 +50,24 @@ public:
         std::unordered_map<std::string, int> required_occurrence_count; {
             for (auto& word : words) { required_occurrence_count[word]++; }
         }
-        const int word_length = words[0].length(), word_count = words.size();
+        const int Lw = words[0].length();
         int L = 0, R = 0;            // current window. Note: The step length of these 2 endpoints is always single word length.
-        const int n = s.length();           // length of input string s
-        int word_count_in_window = 0;
+        const int N = s.length();           // length of input string s
         std::unordered_map<std::string, int> occurrence_count_in_window;
         // We iterate staring from every index in [0, word_len) to get every possible combination
-        for (int i = 0; i < word_length; i++) {
+        for (int i = 0; i < Lw; i++) {
             // right is used to expand the current window, and left is used to shrink the current window whenever the window becomes invalid
             L = i, R = i;
             occurrence_count_in_window.clear();
-            word_count_in_window = 0;
+            int word_count_in_window = 0;
             // We start iterating till end of string. Once we pick a word of length word_len, then we go to next index = right + word_len
-            while (R < n) {
-                const auto curr = s.substr(R, std::min(n - R, word_length));
+            while (R < N) {
+                const auto curr = s.substr(R, std::min(N - R, Lw));
                 // If the curr picked word does not exist in the word array given, then the current window is no longer useful, so we discard all the words we have used, until now and increment right and left to point to the next word in sequence
                 if (required_occurrence_count.contains(curr) == false) {
                     occurrence_count_in_window.clear();
                     word_count_in_window = 0;
-                    R += word_length;
+                    R += Lw;
                     L = R;
                     continue;
                 }
@@ -76,27 +75,26 @@ public:
                 if (occurrence_count_in_window[curr] < required_occurrence_count[curr]) { occurrence_count_in_window[curr]++, word_count_in_window++; }
                 // If the freq gets higher, then we start removing words from the beginning of window, until the window becomes valid again
                 else {
-                    while (L < R) {
-                        auto word_to_remove = s.substr(L, word_length);
+                    while (L < R and occurrence_count_in_window[curr] >= required_occurrence_count[curr]) {
+                        auto word_to_remove = s.substr(L, Lw);
                         occurrence_count_in_window[word_to_remove]--;
                         if (occurrence_count_in_window[word_to_remove] == 0) { occurrence_count_in_window.erase(word_to_remove); }
                         word_count_in_window--;
-                        L += word_length;
-                        if (occurrence_count_in_window[curr] < required_occurrence_count[curr]) { break; }
+                        L += Lw;
                     }
                     // Now the window has becomes valid so we can add the curr word to the usedWords
                     occurrence_count_in_window[curr]++, word_count_in_window++;
                 }
-                R += word_length;
+                R += Lw;
                 // if the words of our current window get equal to the total words required, then we can add the index of the starting of the window (left pointer) to our answer array, and move the left pointer 1 step forward.
                 // We can't set the left pointer to point to right because we might have an answer starting from left + word_len. So we only increment it 1 step forward.
-                if (word_count_in_window == word_count) { // Note: Here len[left, right) == total_words * word_len
+                if (word_count_in_window == words.size()) { // Note: Here len[left, right) == total_words * word_len
                     ans.push_back(L);
-                    auto word_to_remove = s.substr(L, word_length);
+                    auto word_to_remove = s.substr(L, Lw);
                     occurrence_count_in_window[word_to_remove]--;
                     if (occurrence_count_in_window[word_to_remove] == 0) { occurrence_count_in_window.erase(word_to_remove); }
                     word_count_in_window--;
-                    L += word_length;
+                    L += Lw;
                 }
             }
         }
