@@ -45,11 +45,6 @@ public:
         }
         return result;
     }
-    // function to remove a word from usedWords hashmap
-    void remove(std::unordered_map<std::string, int>& hashmap, std::string& key) {
-        hashmap[key]--;
-        if (hashmap[key] <= 0) { hashmap.erase(key); }
-    }
     std::vector<int> find_substring_2(const std::string& s, const std::vector<std::string>& words) {
         std::unordered_map<std::string, int> wordDict;
         std::unordered_map<std::string, int> usedWords;
@@ -83,7 +78,8 @@ public:
                 else {
                     while (left < right) {
                         auto to_remove = s.substr(left, word_len);
-                        remove(usedWords, to_remove);
+                        usedWords[to_remove]--;
+                        if (usedWords[to_remove] == 0) { usedWords.erase(to_remove); }
                         words_used--;
                         left += word_len;
                         if (usedWords[curr] < wordDict[curr]) { break; }
@@ -97,7 +93,8 @@ public:
                 if (words_used == total_words) {
                     ans.push_back(left);
                     auto to_remove = s.substr(left, word_len);
-                    remove(usedWords, to_remove);
+                    usedWords[to_remove]--;
+                    if (usedWords[to_remove] == 0) { usedWords.erase(to_remove); }
                     words_used--;
                     left += word_len;
                 }
