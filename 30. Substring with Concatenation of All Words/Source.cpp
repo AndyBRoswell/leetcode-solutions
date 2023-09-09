@@ -46,57 +46,57 @@ public:
         return result;
     }
     std::vector<int> find_substring_2(const std::string& s, const std::vector<std::string>& words) {
-        std::unordered_map<std::string, int> required_occurrence_count;
-        std::unordered_map<std::string, int> occurrence_count_in_window;
-        const int word_len = words[0].length(), total_word_count = words.size();
-        int left = 0, right = 0;    // current window
-        const int n = s.length();   // length of input string s
-        int total_word_count_in_window = 0;
         std::vector<int> ans;
-        // wordDict contains all words with their frequencies
-        for (auto& word : words) { required_occurrence_count[word]++; }
+        std::unordered_map<std::string, int> required_occurrence_count; {
+            for (auto& word : words) { required_occurrence_count[word]++; }
+        }
+        const int word_length = words[0].length(), word_count = words.size();
+        int L = 0, R = 0;            // current window. Note: The step length of these 2 endpoints is always single word length.
+        const int n = s.length();           // length of input string s
+        int word_count_in_window = 0;
+        std::unordered_map<std::string, int> occurrence_count_in_window;
         // We iterate staring from every index in [0, word_len) to get every possible combination
-        for (int i = 0; i < word_len; i++) {
+        for (int i = 0; i < word_length; i++) {
             // right is used to expand the current window, and left is used to shrink the current window whenever the window becomes invalid
-            left = i, right = i;
+            L = i, R = i;
             occurrence_count_in_window.clear();
-            total_word_count_in_window = 0;
+            word_count_in_window = 0;
             // We start iterating till end of string. Once we pick a word of length word_len, then we go to next index = right + word_len
-            while (right < n) {
-                const auto curr = s.substr(right, std::min(n - right, word_len));
+            while (R < n) {
+                const auto curr = s.substr(R, std::min(n - R, word_length));
                 // If the curr picked word does not exist in the word array given, then the current window is no longer useful, so we discard all the words we have used, until now and increment right and left to point to the next word in sequence
                 if (required_occurrence_count.contains(curr) == false) {
                     occurrence_count_in_window.clear();
-                    total_word_count_in_window = 0;
-                    right += word_len;
-                    left = right;
+                    word_count_in_window = 0;
+                    R += word_length;
+                    L = R;
                     continue;
                 }
                 // If freq of curr word is less then required freq of that word, we can add it to our usedWords, and also increment the no. of words that we have used in the current window
-                if (occurrence_count_in_window[curr] < required_occurrence_count[curr]) { occurrence_count_in_window[curr]++, total_word_count_in_window++; }
+                if (occurrence_count_in_window[curr] < required_occurrence_count[curr]) { occurrence_count_in_window[curr]++, word_count_in_window++; }
                 // If the freq gets higher, then we start removing words from the beginning of window, until the window becomes valid again
                 else {
-                    while (left < right) {
-                        auto word_to_remove = s.substr(left, word_len);
+                    while (L < R) {
+                        auto word_to_remove = s.substr(L, word_length);
                         occurrence_count_in_window[word_to_remove]--;
                         if (occurrence_count_in_window[word_to_remove] == 0) { occurrence_count_in_window.erase(word_to_remove); }
-                        total_word_count_in_window--;
-                        left += word_len;
+                        word_count_in_window--;
+                        L += word_length;
                         if (occurrence_count_in_window[curr] < required_occurrence_count[curr]) { break; }
                     }
                     // Now the window has becomes valid so we can add the curr word to the usedWords
-                    occurrence_count_in_window[curr]++, total_word_count_in_window++;
+                    occurrence_count_in_window[curr]++, word_count_in_window++;
                 }
-                right += word_len;
+                R += word_length;
                 // if the words of our current window get equal to the total words required, then we can add the index of the starting of the window (left pointer) to our answer array, and move the left pointer 1 step forward.
                 // We can't set the left pointer to point to right because we might have an answer starting from left + word_len. So we only increment it 1 step forward.
-                if (total_word_count_in_window == total_word_count) { // Note: Here len[left, right) == total_words * word_len
-                    ans.push_back(left);
-                    auto word_to_remove = s.substr(left, word_len);
+                if (word_count_in_window == word_count) { // Note: Here len[left, right) == total_words * word_len
+                    ans.push_back(L);
+                    auto word_to_remove = s.substr(L, word_length);
                     occurrence_count_in_window[word_to_remove]--;
                     if (occurrence_count_in_window[word_to_remove] == 0) { occurrence_count_in_window.erase(word_to_remove); }
-                    total_word_count_in_window--;
-                    left += word_len;
+                    word_count_in_window--;
+                    L += word_length;
                 }
             }
         }
